@@ -1,11 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+
+import { DashboardService } from './services/dashboard.service';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { HttpClientModule } from '@angular/common/http';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -71,7 +74,7 @@ import { RootComponent } from './root/root.component';
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  }],
-  bootstrap: [ AppComponent ]
+  }, DashboardService],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

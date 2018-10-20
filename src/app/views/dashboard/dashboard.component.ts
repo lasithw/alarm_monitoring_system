@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   templateUrl: 'dashboard.component.html'
@@ -178,13 +178,16 @@ export class DashboardComponent implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true
   };
-  public barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+
+  constructor (private newService: DashboardService){}
+ 
+  public barChartLabels: string[] = this.newService.barChartLabels;
   public barChartType = 'bar';
   public barChartLegend = true;
 
   public barChartData: any[] = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Downsites'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Locations'}
+    { data: this.newService.downSites, label: 'Downsites' },
+    { data: this.newService.locations, label: 'Locations' }
   ];
 
   // barChart1
@@ -223,7 +226,12 @@ export class DashboardComponent implements OnInit {
   public barChart1Legend = false;
   public barChart1Type = 'bar';
 
-  ngOnInit(): void {
+  // Pie chart
+  public pieChartLabels: string[] = ['Kuruneagala', 'Kandy', 'Colombo', 'Galle', 'Gampaha', 'Jaffna'];
+  public pieChartData: number[] = [300, 500, 100, 50, 120, 75];
+  public pieChartType = 'pie';
 
+  ngOnInit(): void {
+    
   }
 }
